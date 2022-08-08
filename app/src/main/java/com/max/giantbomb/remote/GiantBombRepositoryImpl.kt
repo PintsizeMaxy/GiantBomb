@@ -11,7 +11,7 @@ class GiantBombRepositoryImpl(
 ): GiantBombRepository {
     override suspend fun getGamesList(game: String): Either<DomainException, GamesList> {
         return Either.catch {
-            gameService.getGamesList("9d45436f87d3848d2bdcce810bacb6df57dfd134", game)
+            gameService.getGamesList("9d45436f87d3848d2bdcce810bacb6df57dfd134", "name:$game")
         }.mapLeft { DomainException.ServerError(it.toString()) }
     }
 

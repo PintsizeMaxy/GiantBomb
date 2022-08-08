@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Giant Bomb</string>
     <string name="hint_search_game">Search game</string>
+    <string name="error_retrieving_data">Error Retrieving Data</string>
 </resources>

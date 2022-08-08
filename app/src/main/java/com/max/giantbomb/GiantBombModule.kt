@@ -22,7 +22,7 @@ import javax.inject.Singleton
 @Module
 abstract class GiantBombModule {
     companion object {
-        private const val BASE_URL = "https://www.giantbomb.com/api/"
+        private const val BASE_URL = " https://www.giantbomb.com/api/"
 
         @Provides
         @Singleton

@@ -12,8 +12,6 @@ data class GameData(
     val id: String,
     @SerializedName("name")
     val title: String,
-    @SerializedName("image")
-    val imageUrl: String,
     @SerializedName("description")
     val description: String
 )
