@@ -9,4 +9,5 @@ interface GiantBombRepository {
     suspend fun getGame(gameId: String): Either<DomainException, CachedGame>
     suspend fun insertGame(cachedGame: CachedGame)
     suspend fun getViewedGames(): Either<DomainException, List<CachedGame>>
+    suspend fun deleteGames()
 }

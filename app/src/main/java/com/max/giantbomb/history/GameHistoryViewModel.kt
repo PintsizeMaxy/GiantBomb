@@ -22,6 +22,11 @@ class GameHistoryViewModel @Inject constructor(private val giantBombRepository: 
     val viewedGamesState = _viewedGamesState.asStateFlow()
 
     init {
+        fetchGames()
+    }
+
+    // Fetch all previously viewed games from our cache
+    private fun fetchGames() {
         CoroutineScope(Dispatchers.IO).launch {
             giantBombRepository.getViewedGames().fold(
                 {
@@ -32,6 +37,15 @@ class GameHistoryViewModel @Inject constructor(private val giantBombRepository: 
                     _viewedGamesState.emit(LoadState.Success(it))
                 }
             )
+        }
+    }
+
+    // Clear our local cache of view games and reload the data
+    fun clearHistory() {
+        CoroutineScope(Dispatchers.IO).launch {
+            giantBombRepository.deleteGames()
+            _viewedGamesState.emit(LoadState.InFlight)
+            fetchGames()
         }
     }
 }

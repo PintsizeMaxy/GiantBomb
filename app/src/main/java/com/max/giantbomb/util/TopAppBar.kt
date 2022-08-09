@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -22,18 +23,21 @@ fun TopAppBarHome(
     )
 }
 
-// Defines TopAppBar where you can pop the backstack
+// Defines TopAppBar where you can pop the backstack, optional actions
 @Composable
 fun TopAppBarWithBackstack(
     title: String,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
         title = { Text(text = title, fontWeight = FontWeight.Light)},
-        navigationIcon = { BackArrow(onBack) }
+        navigationIcon = { BackArrow(onBack) },
+        actions = actions
     )
 }
 
+// Defines a text button to be display in toolbar if needed
 @Composable
 fun TopBarTextButton(
     label: Int,
@@ -44,9 +48,19 @@ fun TopBarTextButton(
     }
 }
 
+
+// Display back arrow in toolbar if backstack exists on current screen
 @Composable
 fun BackArrow(onBack: () -> Unit) {
     IconButton(onClick = onBack) {
         Icon(Icons.Filled.ArrowBack, stringResource(R.string.back))
+    }
+}
+
+// Display a delete icon where you can clear data
+@Composable
+fun DeleteAction(onDelete: () -> Unit) {
+    IconButton(onClick = onDelete) {
+        Icon(Icons.Filled.Delete, stringResource(R.string.delete))
     }
 }

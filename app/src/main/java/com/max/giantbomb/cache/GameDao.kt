@@ -18,4 +18,7 @@ interface GameDao {
 
     @Query("SELECT * FROM GameData")
     fun getViewedGames(): List<CachedGame>
+
+    @Query("DELETE FROM GameData")
+    fun deleteRecords()
 }

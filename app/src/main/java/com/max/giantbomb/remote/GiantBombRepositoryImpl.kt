@@ -52,4 +52,8 @@ class GiantBombRepositoryImpl(
             gameDao.getViewedGames()
         }.mapLeft { CacheError(it.message) }
     }
+
+    override suspend fun deleteGames() {
+        gameDao.deleteRecords()
+    }
 }

@@ -32,13 +32,13 @@ fun GameCard(game: CachedGame, onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = Modifier.padding(end = regular),
+                modifier = Modifier.padding(end = regular).weight(1f),
                 text = game.name,
                 textAlign = TextAlign.Start,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.body1
             )
             AsyncImage(
-                modifier = Modifier.size(82.dp),
+                modifier = Modifier.size(82.dp).weight(.25f),
                 model = game.url, contentDescription = null,
                 placeholder = painterResource(R.drawable.ic_placeholder),
                 error = painterResource(R.drawable.ic_error_image)

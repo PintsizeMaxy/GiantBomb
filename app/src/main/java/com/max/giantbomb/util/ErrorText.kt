@@ -10,6 +10,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.max.giantbomb.R
 import com.max.giantbomb.ui.theme.large
 
+// Display a default error text throughout the app whenever something goes wrong
 @Composable
 fun ErrorText(){
     Text(
