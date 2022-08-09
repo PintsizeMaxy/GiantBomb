@@ -1,11 +1,8 @@
 package com.max.giantbomb.search
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.max.giantbomb.cache.CachedGame
-import com.max.giantbomb.remote.GameData
-import com.max.giantbomb.remote.GamesList
 import com.max.giantbomb.remote.GiantBombRepository
 import com.max.giantbomb.util.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +20,7 @@ class SearchViewModel @Inject constructor(private val giantBombRepository: Giant
     ViewModel() {
 
     private val _searchState =
-        MutableStateFlow<LoadState<GamesList>>(LoadState.Success(GamesList(emptyList())))
+        MutableStateFlow<LoadState<List<CachedGame>>>(LoadState.Success(emptyList()))
     val searchState = _searchState.asStateFlow()
 
 
@@ -44,16 +41,9 @@ class SearchViewModel @Inject constructor(private val giantBombRepository: Giant
         }
     }
 
-    fun cacheGame(game: GameData) {
+    fun cacheGame(game: CachedGame) {
         CoroutineScope(Dispatchers.IO).launch {
-            giantBombRepository.insertGame(
-                CachedGame(
-                    game.id.orEmpty(),
-                    game.title.orEmpty(),
-                    Uri.parse(game.image?.imageUrl.orEmpty()).toString(),
-                    game.description.orEmpty()
-                )
-            )
+            giantBombRepository.insertGame(game)
         }
     }
 }

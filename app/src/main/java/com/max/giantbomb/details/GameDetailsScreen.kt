@@ -70,7 +70,7 @@ fun GameDetailsScreen(viewModel: GameDetailsViewModel, onBack: () -> Unit) {
                                         R.string.no_description
                                     )
                                 },
-                            modifier = Modifier.padding(start = regular, end = regular)
+                            modifier = Modifier.padding(regular)
                         )
                     }
                 }

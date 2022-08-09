@@ -6,4 +6,5 @@
     <string name="back">Back</string>
     <string name="no_description">No description provided for game.</string>
     <string name="no_results">No results.</string>
+    <string name="viewed_games">Viewed Games</string>
 </resources>

@@ -15,4 +15,7 @@ interface GameDao {
 
     @Query("SELECT EXISTS (SELECT * FROM GameData WHERE gameId = :gameId)")
     fun gameDataEntityExists(gameId: String): Boolean
+
+    @Query("SELECT * FROM GameData")
+    fun getViewedGames(): List<CachedGame>
 }

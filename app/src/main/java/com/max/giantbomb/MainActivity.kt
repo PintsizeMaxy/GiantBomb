@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.max.giantbomb.details.GameDetailsScreen
+import com.max.giantbomb.history.GameHistoryScreen
 import com.max.giantbomb.search.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                         SearchScreen(
                             hiltViewModel(),
                             { navController.navigate("game_details/${it}") },
-                            {})
+                            { navController.navigate("history") })
                     }
                     composable(
                         "game_details/{gameId}",
@@ -35,6 +36,13 @@ class MainActivity : ComponentActivity() {
                         GameDetailsScreen(hiltViewModel()) {
                             navController.popBackStack()
                         }
+                    }
+                    composable("history") {
+                        GameHistoryScreen(
+                            viewModel = hiltViewModel(),
+                            onBack = { navController.popBackStack() },
+                            navigateToDetails = { navController.navigate("game_details/${it}") }
+                        )
                     }
                 }
             }

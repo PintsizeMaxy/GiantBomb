@@ -1,6 +1,5 @@
-package com.max.giantbomb.details
+package com.max.giantbomb.history
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.max.giantbomb.cache.CachedGame
 import com.max.giantbomb.remote.GiantBombRepository
@@ -15,25 +14,22 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class GameDetailsViewModel @Inject constructor(
-    private val giantBombRepository: GiantBombRepository,
-    private val savedStateHandle: SavedStateHandle
-) :
+class GameHistoryViewModel @Inject constructor(private val giantBombRepository: GiantBombRepository) :
     ViewModel() {
 
-    private val _gameDetailsState = MutableStateFlow<LoadState<CachedGame>>(LoadState.InFlight)
-    val gameDetailsState = _gameDetailsState.asStateFlow()
+    private val _viewedGamesState =
+        MutableStateFlow<LoadState<List<CachedGame>>>(LoadState.InFlight)
+    val viewedGamesState = _viewedGamesState.asStateFlow()
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            val id = savedStateHandle.get<String>("gameId").orEmpty()
-            giantBombRepository.getGame(id).fold(
+            giantBombRepository.getViewedGames().fold(
                 {
                     Timber.e(it.toString())
-                    _gameDetailsState.emit(LoadState.Failure)
+                    _viewedGamesState.emit(LoadState.Failure)
                 },
                 {
-                    _gameDetailsState.emit(LoadState.Success(it))
+                    _viewedGamesState.emit(LoadState.Success(it))
                 }
             )
         }
