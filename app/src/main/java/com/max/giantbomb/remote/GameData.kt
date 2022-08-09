@@ -8,17 +8,17 @@ data class GamesList(
 )
 
 data class GameData(
-    @SerializedName("id")
-    val id: String,
+    @SerializedName("guid")
+    val id: String?,
     @SerializedName("name")
-    val title: String,
+    val title: String?,
     @SerializedName("image")
-    val image: Image,
+    val image: Image?,
     @SerializedName("description")
-    val description: String
+    val description: String?
 )
 
 data class Image(
     @SerializedName("original_url")
-    val imageUrl: String
+    val imageUrl: String?
 )

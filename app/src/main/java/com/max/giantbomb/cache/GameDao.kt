@@ -12,4 +12,7 @@ interface GameDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGame(cachedGame: CachedGame)
+
+    @Query("SELECT EXISTS (SELECT * FROM GameData WHERE gameId = :gameId)")
+    fun gameDataEntityExists(gameId: String): Boolean
 }

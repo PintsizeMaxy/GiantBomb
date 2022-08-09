@@ -5,10 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.max.giantbomb.screens.SearchScreen
+import androidx.navigation.navArgument
+import com.max.giantbomb.details.GameDetailsScreen
+import com.max.giantbomb.search.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,9 +21,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "search"){
-                    composable("search"){
-                        SearchScreen(hiltViewModel(), {})
+                NavHost(navController = navController, startDestination = "search") {
+                    composable("search") {
+                        SearchScreen(
+                            hiltViewModel(),
+                            { navController.navigate("game_details/${it}") },
+                            {})
+                    }
+                    composable(
+                        "game_details/{gameId}",
+                        arguments = listOf(navArgument("gameId") { type = NavType.StringType })
+                    ) {
+                        GameDetailsScreen(hiltViewModel()) {
+                            navController.popBackStack()
+                        }
                     }
                 }
             }

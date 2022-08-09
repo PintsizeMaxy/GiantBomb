@@ -6,6 +6,6 @@ import com.max.giantbomb.util.DomainException
 
 interface GiantBombRepository {
     suspend fun getGamesList(game: String): Either<DomainException, GamesList>
-    suspend fun getGame(gameId: String): Either<DomainException, GameData>
+    suspend fun getGame(gameId: String): Either<DomainException, CachedGame>
     suspend fun insertGame(cachedGame: CachedGame)
 }

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Giant Bomb</string>
-    <string name="hint_search_game">Search game</string>
+    <string name="hint_search_game">Search Games…</string>
     <string name="error_retrieving_data">Error Retrieving Data</string>
     <string name="history">View History</string>
+    <string name="back">Back</string>
+    <string name="no_description">No description provided for game.</string>
+    <string name="no_results">No results.</string>
 </resources>

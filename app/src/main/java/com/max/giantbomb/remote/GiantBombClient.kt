@@ -11,4 +11,10 @@ interface GiantBombClient {
         @Query("filter") game: String,
         @Query("format") format: String = "json"
     ): GamesList
+
+    @GET("game/{guid}")
+    suspend fun getGameDetails(
+        @Path("guid") guid: String,
+        @Query("api_key") apiKey: String
+    ): GameData
 }
