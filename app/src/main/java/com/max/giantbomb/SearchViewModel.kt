@@ -6,6 +6,7 @@ import com.max.giantbomb.remote.GamesList
 import com.max.giantbomb.remote.GiantBombRepository
 import com.max.giantbomb.util.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -20,8 +21,10 @@ class SearchViewModel @Inject constructor(private val giantBombRepository: Giant
     val searchState = _searchState.asStateFlow()
 
 
-    fun queryGames(query: String){
-        viewModelScope.launch {
+    private var job: Job? = null
+    fun queryGames(query: String) {
+        job?.cancel()
+        job = viewModelScope.launch {
             _searchState.emit(LoadState.InFlight)
             giantBombRepository.getGamesList(query).fold(
                 { error ->
@@ -34,5 +37,4 @@ class SearchViewModel @Inject constructor(private val giantBombRepository: Giant
             )
         }
     }
-
 }

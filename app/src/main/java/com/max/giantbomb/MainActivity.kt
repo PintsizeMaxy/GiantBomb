@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "search"){
                     composable("search"){
-                        SearchScreen(hiltViewModel())
+                        SearchScreen(hiltViewModel(), {})
                     }
                 }
             }

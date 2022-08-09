@@ -12,6 +12,13 @@ data class GameData(
     val id: String,
     @SerializedName("name")
     val title: String,
+    @SerializedName("image")
+    val image: Image,
     @SerializedName("description")
     val description: String
+)
+
+data class Image(
+    @SerializedName("original_url")
+    val imageUrl: String
 )
